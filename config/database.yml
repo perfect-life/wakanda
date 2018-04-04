@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  prepared_statements: false
+  encoding: unicode
+  pool: <%= Integer(ENV['MAX_THREADS'] || 8) %>
+  connect_timeout: 2
+
+development: &development
+  <<: *default
+  database: wakanda_development
+  pool: 30
+
+test: &test
+  <<: *default
+  database: wakanda_test
+
+production: &production
+  <<: *default
+  adapter: postgresql
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  pool: <%= ENV['MAX_THREADS'] || 5 %>
