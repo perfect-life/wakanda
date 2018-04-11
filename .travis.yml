@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.5.0
+  - ruby
+before_script:
+  - psql -c 'create database wakanda_test;' -U postgres
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
